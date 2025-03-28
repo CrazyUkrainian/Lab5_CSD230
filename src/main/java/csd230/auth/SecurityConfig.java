@@ -2,6 +2,7 @@ package csd230.auth;
 import csd230.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,19 +37,33 @@ public class SecurityConfig  {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
-                .authorizeRequests()
-                .requestMatchers("/rest/auth/**").permitAll()
-                .requestMatchers("/rest/**").permitAll() // is this right?? seems to work can only access if logged in but ???
-                .anyRequest().authenticated()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests(auth -> auth
+                        // public read access to book, ticket, magazine, discmag
+                        .requestMatchers(HttpMethod.GET, "/rest/book/**", "/rest/ticket/**", "/rest/magazine/**", "/rest/discmag/**").permitAll()
+
+                        // allow login and signup
+                        .requestMatchers("/rest/auth/**").permitAll()
+
+                        // all cart-related endpoints must be authenticated
+                        .requestMatchers("/rest/cart/**", "/rest/cartitem/**").authenticated()
+
+                        .requestMatchers("/rest/**").permitAll()
+                        // any other requests must be authenticated
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
 
     @SuppressWarnings("deprecation")

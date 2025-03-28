@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * DTO for {@link jpa_04.entities.Cart}
+ * DTO for {@link csd230.entities.Cart}
  */
 /**
- * DTO for {@link jpa_04.entities.CartI}
+ * DTO for {@link csd230.entities.CartItem}
  */
 public class Cart {
     private List<CartItem> items;

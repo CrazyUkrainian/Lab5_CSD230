@@ -5,6 +5,10 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Logout from "../pages/Logout";
 import Signin from "../pages/Signin.jsx";
 import Book from "../pages/Book.jsx";
+import Ticket from "../pages/Ticket.jsx";
+import Magazine from "../pages/Magazine.jsx";
+import DiscMag from "../pages/DiscMag.jsx";
+import Cart from "../pages/Cart.jsx";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -34,6 +38,22 @@ const Routes = () => {
         {
           path: "/book",
           element: <Book/>,
+        },
+        {
+          path: "/ticket",
+          element: <Ticket />,
+        },
+        {
+          path: "/DiscMag",
+          element: <DiscMag />,
+        },
+        {
+          path: "/Magazine",
+          element: <Magazine />,
+        },
+        {
+          path: "/Cart",
+          element: <Cart />,
         },
         {
           path: "/profile",

@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author fcarella
  */
 /**
- * DTO for {@link jpa_04.entities.Magazine}
+ * DTO for {@link csd230.entities.Magazine}
  */
 public class Magazine extends Publication {
 

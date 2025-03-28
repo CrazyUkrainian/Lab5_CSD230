@@ -4,7 +4,7 @@ package csd230.pojos;
  * DTO for {@link jpa_04.entities.BookEntity}
  */
 /**
- * DTO for {@link jpa_04.entities.Book}
+ * DTO for {@link csd230.entities.Book}
  */
 public class Book extends Publication {
     private String author;

@@ -2,13 +2,13 @@ package csd230.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 /**
- * DTO for {@link jpa_04.entities.PublicationEntity}
+ * DTO for {@link csd230.entities.PublicationEntity}
  */
 /**
- * DTO for {@link jpa_04.entities.Publication}
+ * DTO for {@link csd230.entities.Publication}
  */
 /**
- * DTO for {@link jpa_04.entities.Publication}
+ * DTO for {@link csd230.entities.Publication}
  */
 public abstract class Publication extends CartItem implements Serializable {
     private String title;

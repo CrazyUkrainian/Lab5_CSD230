@@ -3,7 +3,7 @@ package csd230.pojos;
  * @author fcarella
  */
 /**
- * DTO for {@link jpa_04.entities.Ticket}
+ * DTO for {@link csd230.entities.Ticket}
  */
 public class Ticket extends CartItem {
     private String text;

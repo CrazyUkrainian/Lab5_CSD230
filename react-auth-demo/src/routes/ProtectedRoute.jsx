@@ -1,15 +1,18 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
+import Navbar from "../pages/Navbar"; // ✅ import your Navbar component
 
 export const ProtectedRoute = () => {
   const { token } = useAuth();
 
-  // Check if the user is authenticated
-  if (!token) {
-    // If not authenticated, redirect to the login page
-    return <Navigate to="/login" />;
-  }
+  // Redirect if not logged in
+  if (!token) return <Navigate to="/login" />;
 
-  // If authenticated, render the child routes
-  return <Outlet />;
+  // Render the nav + child routes
+  return (
+      <>
+        <Navbar />     {/* Show Navbar on all protected pages */}
+        <Outlet />     {/* This renders the actual page (Book, Ticket, etc.) */}
+      </>
+  );
 };

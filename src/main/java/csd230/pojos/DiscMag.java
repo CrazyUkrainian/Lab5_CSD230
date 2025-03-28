@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author fcarella
  */
 /**
- * DTO for {@link jpa_04.entities.DiscMag}
+ * DTO for {@link csd230.entities.DiscMag}
  */
 public class DiscMag extends Magazine {
 
