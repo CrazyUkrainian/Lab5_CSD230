@@ -26,9 +26,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-    // https://spring.io/guides/gs/rest-service-cors
-	// allow cross origin requests otherwise react calls to server rest api wont work
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
 
@@ -43,32 +40,6 @@ public class Application {
             }
         };
     }
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**") // Apply to all endpoints
-//                        .allowedOrigins("http://localhost:5173") //  Specific origin
-//                        .allowedOrigins("http://localhost:8080") //  Specific origin
-//                        .allowedMethods("GET", "POST", "PUT", "DELETE","OPTIONS") // Allowed HTTP methods
-//                        .allowedHeaders("*") // Allowed headers
-//                        .allowCredentials(true) // Important for cookies and authentication
-//                        .maxAge(3600); // Cache duration for preflight requests (in seconds)
-//            }
-//        };
-//    }
-
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-////                registry.addMapping("/rest/book");//.allowedOrigins("http://localhost:9000");
-//                registry.addMapping("/**").allowedOrigins("http://localhost:5173");
-//            }
-//        };
-//    }
-
 	@Autowired
 	CartItemRepository cartItemRepository;
 

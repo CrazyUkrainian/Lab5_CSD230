@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
-import Navbar from "../pages/Navbar"; // ✅ import your Navbar component
+import Navbar from "../pages/Navbar"; //  import your Navbar component
 
 export const ProtectedRoute = () => {
   const { token } = useAuth();

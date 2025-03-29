@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../provider/authProvider";
 
 function Cart() {
     const [cart, setCart] = useState(null);
@@ -9,13 +10,14 @@ function Cart() {
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { token } = useAuth();
 
-    // Load or create user's single cart
+    // load or create user's single cart
     useEffect(() => {
         fetchOrCreateCart();
     }, []);
 
-    // Refetch items when itemType changes
+    // re fetch items when itemType changes
     useEffect(() => {
         fetchItemsByType(itemType);
     }, [itemType]);
@@ -47,10 +49,10 @@ function Cart() {
         }
     };
 
+
     const handleAddToCart = async () => {
         if (!selectedItemId || !cart?.id) return;
         try {
-            // Get the full item info to extract price + description
             const itemRes = await axios.get(`http://localhost:8080/rest/${itemType}/${selectedItemId}`);
             const selected = itemRes.data;
 
@@ -60,13 +62,17 @@ function Cart() {
                 description: `${itemType.toUpperCase()}: ${selected.title || selected.text || selected.description || "Unknown"}`
             };
 
-            // Add item to existing cart
             const updatedCart = {
                 ...cart,
                 items: [...(cart.items || []), newItem]
             };
 
-            await axios.put(`http://localhost:8080/rest/cart/${cart.id}`, updatedCart);
+            await axios.put(`http://localhost:8080/rest/cart/${cart.id}`, updatedCart, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
             fetchOrCreateCart();
             setQuantity(1);
         } catch (err) {
